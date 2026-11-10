@@ -1,0 +1,31 @@
+# 每次推到 main，就把仓库里的 Markdown 做成阅读网站，发布到 GitHub Pages。
+# 第一次要在仓库 Settings → Pages → Source 选「GitHub Actions」。
+name: 发布阅读网站
+on:
+  push: { branches: [main] }
+  workflow_dispatch:
+permissions: { contents: read, pages: write, id-token: write }
+concurrency: { group: pages, cancel-in-progress: true }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install mkdocs-material
+      # 把仓库内容复制到临时目录当文档源（不复制 .git / .github / 网站配置本身）
+      - run: |
+          mkdir -p _site_src
+          rsync -a --exclude .git --exclude .github --exclude _site_src --exclude mkdocs.yml --exclude site --exclude '__pycache__' ./ _site_src/
+          cp README.md _site_src/index.md
+      - run: mkdocs build --strict || mkdocs build
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: site }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: ${{ steps.deployment.outputs.page_url }} }
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

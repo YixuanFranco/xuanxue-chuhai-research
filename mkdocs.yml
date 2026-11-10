@@ -1,0 +1,27 @@
+site_name: 出海调研库
+site_url: https://yixuanfranco.github.io/xuanxue-chuhai-research/
+repo_url: https://github.com/YixuanFranco/xuanxue-chuhai-research
+edit_uri: edit/main/
+docs_dir: _site_src
+theme:
+  name: material
+  language: zh
+  features: [navigation.sections, navigation.expand, navigation.top, search.highlight, content.action.edit, toc.follow]
+  palette:
+    - scheme: default
+      primary: teal
+      toggle: { icon: material/brightness-7, name: 深色 }
+    - scheme: slate
+      primary: teal
+      toggle: { icon: material/brightness-4, name: 浅色 }
+plugins:
+  - search:
+      lang: [zh, en]
+      separator: '[\s​\-、，。：；！？（）「」]+'
+markdown_extensions:
+  - tables
+  - toc: { permalink: true }
+  - admonition
+  - pymdownx.superfences
+exclude_docs: |
+  工具/__pycache__/
