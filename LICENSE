@@ -1,0 +1,30 @@
+本仓库采用双许可：
+
+1. 文档（所有 .md 文件及 PDF）：CC BY-NC-SA 4.0（署名—非商业性使用—相同方式共享）
+   全文：https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-hans
+   署名方式：Yixuan，xuanxue-chuhai-research，https://github.com/YixuanFranco/xuanxue-chuhai-research
+
+2. 脚本（工具/ 下所有 .py 文件）：MIT License
+
+   Copyright (c) 2026 Yixuan
+
+   Permission is hereby granted, free of charge, to any person obtaining a copy
+   of this software and associated documentation files (the "Software"), to deal
+   in the Software without restriction, including without limitation the rights
+   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   copies of the Software, and to permit persons to whom the Software is
+   furnished to do so, subject to the following conditions:
+
+   The above copyright notice and this permission notice shall be included in all
+   copies or substantial portions of the Software.
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   SOFTWARE.
+
+3. 工具/semrush/ 下的 CSV 是调研者用自己购买的 Semrush API 额度导出的数据，随本仓库一并分享，
+   仅供学习研究；Semrush 的数字是模型估计值，引用时请注明来源与日期（2026-11-05～08）。
