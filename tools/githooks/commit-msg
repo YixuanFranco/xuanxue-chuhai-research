@@ -1,0 +1,16 @@
+#!/bin/sh
+# commit-msg：提交说明里不留 AI 工具的署名行。
+#
+# 为什么存在：AI 编程工具会自动在提交说明末尾加「Co-Authored-By: <模型>」和会话链接，
+# GitHub 会把前者显示成共同作者。这个库的贡献署名只写真人。
+# 启用（每个本地副本跑一次）：git config core.hooksPath tools/githooks
+# 只用网页编辑的同学不用管它。
+f="$1"
+tmp="$f.strip.$$"
+grep -viE '^[[:space:]]*(co-authored-by:.*(claude|anthropic|openai|gpt|codex|gemini|copilot|cursor|doubao|noreply@)|claude-session:|🤖 generated with)' "$f" > "$tmp" || true
+if ! cmp -s "$f" "$tmp"; then
+    cat "$tmp" > "$f"
+    echo "commit-msg：已删掉 AI 工具的署名行" >&2
+fi
+rm -f "$tmp"
+exit 0

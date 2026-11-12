@@ -1,0 +1,26 @@
+# 检查提交说明里有没有 AI 工具的署名行（Co-Authored-By: <模型>）。有就标红。
+# 本地钩子 tools/githooks/commit-msg 会自动删；这里是第二道，防没装钩子的情况。
+name: 署名检查
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 提交说明不留 AI 署名行
+        run: |
+          bad=$(git log --format='%h %an%n%B' | grep -ciE '^[[:space:]]*co-authored-by:.*(claude|anthropic|openai|gpt|codex|gemini|copilot|cursor|doubao)' || true)
+          if [ "$bad" != "0" ]; then
+            echo "发现 $bad 行 AI 工具署名："
+            git log --format='%h %s' --grep='Co-Authored-By' -i | head -20
+            echo "本地启用钩子：git config core.hooksPath tools/githooks"
+            exit 1
+          fi
+          echo "通过：没有 AI 工具署名行"
