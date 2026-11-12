@@ -96,4 +96,5 @@ https://github.com/signup ，免费。用户名以后会显示在你的贡献上
 
 文档 CC BY-NC-SA 4.0，脚本 MIT，详见 [`LICENSE`](LICENSE)。引用时注明仓库地址和文件名，并保留信度符号。
 
-有问题先开一个议题；找不到人就 @YixuanFranco。
+有问题先开一个议题https://github.com/YixuanFranco/xuanxue-chuhai-research/discussions；  
+找不到人就 @YixuanFranco。
