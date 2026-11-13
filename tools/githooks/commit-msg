@@ -7,8 +7,11 @@
 # 只用网页编辑的同学不用管它。
 f="$1"
 tmp="$f.strip.$$"
-grep -viE '^[[:space:]]*(co-authored-by:.*(claude|anthropic|openai|gpt|codex|gemini|copilot|cursor|doubao|noreply@)|claude-session:|🤖 generated with)' "$f" > "$tmp" || true
-if ! cmp -s "$f" "$tmp"; then
+# 先看有没有要删的行；没有就什么都不动、什么都不说。
+# （2026-11-14 修：原先用「删完和原文不一样」来判断，但 git merge -m 写的说明末尾没有换行，
+#   grep 会补一个，于是没有署名行的提交也被报成「已删掉」——提示在说一件没发生的事。）
+if grep -qiE '^[[:space:]]*(co-authored-by:.*(claude|anthropic|openai|gpt|codex|gemini|copilot|cursor|doubao|noreply@)|claude-session:|🤖 generated with)' "$f"; then
+    grep -viE '^[[:space:]]*(co-authored-by:.*(claude|anthropic|openai|gpt|codex|gemini|copilot|cursor|doubao|noreply@)|claude-session:|🤖 generated with)' "$f" > "$tmp" || true
     cat "$tmp" > "$f"
     echo "commit-msg：已删掉 AI 工具的署名行" >&2
 fi
